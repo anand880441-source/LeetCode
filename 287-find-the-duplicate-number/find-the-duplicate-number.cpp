@@ -7,8 +7,7 @@ public:
         do{
             num1 = nums[num1];
             num2 = nums[nums[num2]];
-        }
-        while(num1 != num2);
+        }while(num1 != num2);
 
         num1 = nums[0];
         while(num1 != num2){
