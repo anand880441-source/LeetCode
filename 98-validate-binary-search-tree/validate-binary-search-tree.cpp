@@ -22,7 +22,7 @@ public:
         }
         return true; 
     }
-
+ 
 private:
     void inorder(TreeNode* root, vector<int>& values) {
         if (root == NULL) return;
