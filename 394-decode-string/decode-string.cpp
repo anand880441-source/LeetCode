@@ -1,38 +1,36 @@
 class Solution {
 public:
     string decodeString(string s) {
-        stack<int> numSt;
-        stack<string> strSt;
-        int num = 0;
-        string currentString = "";
-        
-        for (int i = 0; i < s.size(); i++) {
-            if (isdigit(s[i])) {
-                num = num * 10 + (s[i] - '0'); 
-            } 
-            else if (s[i] == '[') { 
-                strSt.push(currentString);
-                numSt.push(num);    
-                currentString = "";
-                num = 0;
-            } 
-            else if (s[i] == ']') {
-                string temp = currentString;
-                currentString = strSt.top();
-                strSt.pop();
-                
-                int count = numSt.top();
-                numSt.pop();
-                
-                while (count--) {
-                    currentString += temp;
+        int i = 0;
+        return answer(s, i);
+    }
+
+    string answer(string &s, int &i){
+        string result = "";
+
+        while(i < s.size() && s[i] != ']'){
+            if(isalpha(s[i])){
+                result += s[i];
+                i++;
+            }
+            else if(isdigit(s[i])){
+                int num = 0;
+                while(i < s.size() && isdigit(s[i])){
+                    num = num * 10 + (s[i] - '0');
+                    ++i;
                 }
-            } 
-            else {
-                currentString += s[i];
+                
+                ++i; 
+
+                string temp = answer(s, i);
+
+                ++i; 
+
+                while(num--){
+                    result += temp;
+                }
             }
         }
-        
-        return currentString;
+        return result; 
     }
 };
